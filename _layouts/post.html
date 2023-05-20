@@ -113,6 +113,21 @@ layout: default
                 </div>
                 <!-- disqus 评论框 end -->
                 {% endif %}
+                <div id="review-container"></div>
+                <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+                <script src="https://jjeejj.github.io/js/gitment.js"></script>
+                <script>
+                var gitment = new Gitment({
+                id: '{{ page.date }}',
+                owner: 'goldbrown',
+                repo: 'goldbrown.github.io',
+                oauth: {
+                    client_id: '4fd7389bcf3d00a082ff',
+                    client_secret: 'b0828188fde3bf94c5c6029dc2fd28ed6fe7f66f',
+                },
+                })
+                gitment.render('review-container')
+                </script>
 
             </div>  
 

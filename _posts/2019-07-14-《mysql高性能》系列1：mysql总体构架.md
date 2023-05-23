@@ -15,7 +15,7 @@ tags:
 mysql构架可以分为三层，分别是客户端、服务层和存储引擎层，如下图所示。
 
 
-![picutre](../img/article-img/BlogPictureBackup/2019-07-14-《mysql高性能》系列1：mysql总体构架/ia_800000000.jpg)
+![picutre](https://raw.githubusercontent.com/goldbrown/goldbrown.github.io/main/img/article-img/BlogPictureBackup/2019-07-14-%E3%80%8Amysql%E9%AB%98%E6%80%A7%E8%83%BD%E3%80%8B%E7%B3%BB%E5%88%971%EF%BC%9Amysql%E6%80%BB%E4%BD%93%E6%9E%84%E6%9E%B6/ia_800000000.jpg)
 
 * 客户端   
 可以认为是提供给用户使用的一个工具，方便用户使用，同时，提供了连接管理、授权认证和安全的功能。比如，对于每一个客户端发过来的请求，服务层都会从线程池中取出一个线程来处理请求。客户端连接到服务层时，需要输入用户名、主机信息和密码来进行安全认证，也可以使用ssl方式连接。

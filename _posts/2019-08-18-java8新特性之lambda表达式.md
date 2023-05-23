@@ -70,7 +70,7 @@ ages.sort((o1, o2) -> o1 - o2);
 
 例如，java8中的Comparator接口，除了Object类的equals(Object)方法外，就只有一个抽象方法int compare(T, T)。那么Comparator就是一个函数式接口。我们可以将lambda表达式赋给Comparator。lambda表达式对应的就是图中的抽象方法int compare(T, T)
 
-![](http://ww1.sinaimg.cn/large/006tNc79gy1g63to3r9rdj30ja0litcr.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_1600000000.jpg?raw=true)
 
 
 ```java
@@ -172,7 +172,7 @@ ages.sort((o1, o2) -> o1 - o2);
 匿名内部类看起来和lambda表达式很像，可能很多人为认为lambda表达式是匿名内部类的语法糖，但实际上并不是。
 
 匿名内部类和lambda表达式的比较
-![lambda vs anonymous inner class](http://ww4.sinaimg.cn/large/006y8mN6ly1g6avl89oykj315u0lkgtj.jpg)
+![lambda vs anonymous inner class](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_1600000001.jpg?raw=true)
 
 effectively final的解释是，如果一个变量没有声明为final的，但是，在初始化之后都没有改变过，那么就是effectively final（相当于final）的变量。
 ```java

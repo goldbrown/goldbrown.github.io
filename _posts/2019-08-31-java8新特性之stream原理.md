@@ -24,8 +24,7 @@ list.stream().filter(s -> s != null)
 # 1、类的继承关系
 
 类的继承关系如下图所示
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8j843asj30p00llgn2.jpg)
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8jzb9ggj30rz09z3z7.jpg) 
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000000.jpg?raw=true) 
 
 `BaseStream`：最基础的stream接口。定义了流最基础的操作，比如，将流转化为并行流的操作parallel()和将流转化为串行流的操作sequential()。   
 `Stream`：定义了流最常用的用户可以使用的操作，比如，filter()，map()，reduce()。   
@@ -58,16 +57,17 @@ list.stream().filter(s -> s.length() > 5).sorted((s1, s2) -> s1.length() - s2.le
 ## 构建作用链
 
 一般，stream的操作为：一个源节点，多个中间操作，最后一个终止操作。因此，构建的双向链表一般如下图所示。
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8n2oi4yj313q05i3z6.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000002.jpg?raw=true)
+
 1）当调用list.stream()时，就会创建一个源节点。  
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8o5gpfvj308g056aa0.jpg) 
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000003.jpg?raw=true) 
 2）调用filter()无状态中间操作     
 当调用filter()时，只是将操作加到链表末尾。将Head和FilterOp连接起来。   
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8pkoml6j30fr05mwel.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000004.jpg?raw=true)
 3）调用sorted()有状态中间操作   
 
 当调用sorted()时，也是将排序Op操作加到链表末尾。此外，一些属性会记录排序操作需要的数据，比如，比较器Comparator。
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8qbzywoj30q605yaad.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000005.jpg?raw=true)
 ## 作用链循环处理每个元素
 
 4）调用collect()终止操作    
@@ -81,7 +81,7 @@ list.stream().filter(s -> s.length() > 5).sorted((s1, s2) -> s1.length() - s2.le
 下面看看代码的实现。
 
 用来收集作用链处理结果的数据结构叫做Sink（水槽），其继承关系如下。
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8sc20raj30mp0y1q53.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000006.jpg?raw=true)
 `Sink`是用来收集处理结果的水槽，其定义了收集的接口，包括begin(),accept()和end()。客户端得保证调用顺序依次是begin()，accept()和end()，类似于模板模式。    
 `AccumulatingSink`是用来收集reduce结果的水槽接口。定义了combine(K other)这个具体reduce的动作接口。   
 `ReducingSink`实现了具体的begin()，accept()和combine()动作。    
@@ -97,19 +97,19 @@ return isParallel()
 ```
 
 4.2）如果是串行流，则会调用终止操作对应的evaluate方法。
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8umulxaj30ih04pwfd.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000007.jpg?raw=true)
 我们这里考虑ReduceOp的情况。
 
 3）在evaluate方法中，会创建一个ReducingSink，之后会用来收集reduce的处理结果。
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8uhasqlj30u105gjsb.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000008.jpg?raw=true)
 4）接下来，就是使用wrapSink()对Sink进行封装。封装的结果就是形成一个水槽的单向链表。
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8w1b4qgj313e097405.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000009.jpg?raw=true)
 
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8wvwjeij30vy08lgm6.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000010.jpg?raw=true)
 5）使用copyInto()方法，对元素进行迭代，依次由水槽单向链表处理。
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8xcz94fj30y00bh40p.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000011.jpg?raw=true)
 
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8xu7evhj30sm0jxn0j.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000012.jpg?raw=true)
 在forEachRemaing()中，会对流元素进行迭代处理。每个元素都经过action来处理。这里的action就是前面提到的封装后的sink单向链表。
 
 
@@ -118,7 +118,7 @@ return isParallel()
 1）每个Sink都会调用各自的begin()，accept()和end()方法。begin()是通知Sink流将要过来了，请Sink做好准备，比如，有状态的操作需要创建一个List来存储元素。一般，accept()是正式的处理流的操作。end()通知Sink流的处理结束了，之前创建的一些临时数据结构可以销毁了。    
 2）对于有状态的操作（水槽），对应的Sink会有存储中间结果的数据结构。比如，Sort Sink会使用一个List来存储流元素。在end()调用之后，才进行用户传入的操作，例如排序，因为必须等待所有元素到来之后才可以进行排序。之后，再调用下游的begin()，forEach()（accept()方法）和end()方法，开始新的流处理。    
 3）对于终止操作，在begin()调用时，会创建一个对应的数据结构来存储结果；在forEach()的过程中，收集元素；在end()调用时，返回结果。   
-![](https://tva1.sinaimg.cn/large/006y8mN6gy1g6j8yx9oksj31db0u0n2t.jpg)
+![](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2400000013.jpg?raw=true)
 
 
 # 总结

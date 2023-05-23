@@ -284,7 +284,7 @@ System.out.println(count);
 ```
 那么，它们各个方面有什么不同呢？知道它们的不同，可以让我们在合适的场景下选择合适的方式。
 
-![for-each vs stream](http://ww1.sinaimg.cn/large/006y8mN6ly1g6av8rwmpwj31460dzdn8.jpg)
+![for-each vs stream](https://github.com/goldbrown/goldbrown.github.io/blob/main/img/article-img/BlogPictureBackup/java8%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8Bstream%E6%93%8D%E4%BD%9C_-_Brown%E7%9A%84%E5%8D%9A%E5%AE%A2___BY_Brown/ia_2200000000.jpg?raw=true)
 
 > **我们推荐**
 - 1）当lambda表达式简洁时，可以使用stream流处理；当lambda表达式比较复杂时，则使用传统的for-each循环。
